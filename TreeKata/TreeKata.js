@@ -1,3 +1,3 @@
 exports.Calculator = tree => {
-    return tree == "TRUE" ? true: false;
+    return tree == "TRUE" || tree == "NOT FALSE" ? true: false;
 }
