@@ -5,6 +5,7 @@ describe("TreeKata", () => {
   test.each`
     input     | expectedResult
     ${"TRUE"} | ${true}
+    ${"FALSE"} | ${false}
 
   `(
     "should calculate score of $expectedResult from $input",
