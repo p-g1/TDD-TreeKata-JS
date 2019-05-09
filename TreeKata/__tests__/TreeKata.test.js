@@ -8,7 +8,7 @@ describe("TreeKata", () => {
     ${"FALSE"} | ${false}
 
   `(
-    "should calculate score of $expectedResult from $input",
+    "should calculate boolean of $expectedResult from $input",
     ({ input, expectedResult }) => {
       expect(Tree.Calculator(input)).toBe(expectedResult);
     }
