@@ -3,7 +3,7 @@ require("jest-each");
 
 describe("TreeKata", () => {
   test.each`
-    input                                  | expectedResult
+    input     | expectedResult
     ${"TRUE"} | ${true}
 
   `(

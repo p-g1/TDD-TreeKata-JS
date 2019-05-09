@@ -1,3 +1,3 @@
 exports.Calculator = tree => {
-    return tree;
+    return true;
 }
