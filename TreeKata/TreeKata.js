@@ -1,8 +1,5 @@
 exports.Calculator = tree => {
-  return tree == "TRUE AND TRUE" ||
-    tree == "TRUE" ||
-    tree == "NOT FALSE" ||
-    tree.match(/TRUE OR/)
+  return tree == "TRUE" || tree.match(/TRUE OR|NOT FALSE|TRUE AND TRUE/)
     ? true
     : false;
 };
