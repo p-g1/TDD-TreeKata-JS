@@ -11,7 +11,9 @@ describe("TreeKata", () => {
     ${"TRUE AND FALSE"}  | ${false}
     ${"FALSE AND FALSE"} | ${false}
     ${"TRUE AND TRUE"}   | ${true}
-
+    ${"TRUE OR FALSE"}   | ${true}
+    ${"FALSE OR FALSE"}  | ${false}
+    ${"TRUE OR TRUE"}    | ${true}
   `(
     "should calculate boolean of $expectedResult from $input",
     ({ input, expectedResult }) => {
