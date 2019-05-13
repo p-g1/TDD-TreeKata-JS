@@ -1,5 +1,5 @@
 exports.Calculator = tree => {
-  tree = tree
+  return tree
     .replace(/NOT FALSE/g, "TRUE")
     .replace(/NOT TRUE/g, "FALSE")
     .replace(/FALSE AND TRUE/g, "FALSE")
@@ -9,8 +9,10 @@ exports.Calculator = tree => {
     .replace(/FALSE OR TRUE/g, "TRUE")
     .replace(/FALSE OR FALSE/g, "FALSE")
     .replace(/TRUE OR FALSE/g, "TRUE")
-    .replace(/TRUE OR TRUE/g, "TRUE");
-  return tree.match(/(^TRUE$)|TRUE OR|NOT FALSE|TRUE AND TRUE/) ? true : false;
+    .replace(/TRUE OR TRUE/g, "TRUE")
+    .match(/(^TRUE$)|TRUE OR|NOT FALSE|TRUE AND TRUE/)
+    ? true
+    : false;
 };
 
 //precedence NOT AND OR
