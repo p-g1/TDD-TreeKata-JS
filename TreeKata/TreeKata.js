@@ -3,9 +3,7 @@ exports.Calculator = tree => {
     .replaceNot()
     .replaceAnd()
     .replaceOr()
-    .match(/(^TRUE$)|TRUE OR|NOT FALSE|TRUE AND TRUE/)
-    ? true
-    : false;
+    .calculate();
 };
 
 String.prototype.replaceNot = function() {
@@ -25,6 +23,12 @@ String.prototype.replaceOr = function() {
               .replace(/FALSE OR FALSE/g, "FALSE")
               .replace(/TRUE OR FALSE/g, "TRUE")
              .replace(/TRUE OR TRUE/g, "TRUE");
+}
+
+String.prototype.calculate = function() {
+  return this.match(/(^TRUE$)|TRUE OR|NOT FALSE|TRUE AND TRUE/)
+  ? true
+  : false;
 }
 
 //precedence NOT AND OR
