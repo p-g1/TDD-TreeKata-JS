@@ -20,6 +20,8 @@ describe("TreeKata", () => {
     ${"NOT FALSE AND TRUE AND NOT TRUE OR NOT FALSE OR TRUE"} | ${true}
     ${"(NOT FALSE)"}                                          | ${true}
     ${"(NOT FALSE) AND TRUE AND (TRUE OR FALSE)"}             | ${true}
+    ${"NOT (TRUE AND TRUE)"}                                  | ${false}
+    ${"(TRUE OR TRUE OR TRUE) AND FALSE"}                     | ${false}
   `(
     "should calculate boolean of $expectedResult from $input",
     ({ input, expectedResult }) => {
