@@ -1,10 +1,14 @@
 exports.Calculator = tree => {
-  return tree
-    .replaceNot()
-    .replaceAnd()
-    .replaceOr()
-    .replace(/\(|\)/g, "")
-    .calculate();
+  tree = tree.split(/\(|\)/);
+  tree.forEach(x =>
+    x
+      .replaceNot()
+      .replaceAnd()
+      .replaceOr()
+  );
+
+  console.log(tree.join(" "));
+  return tree.join(" ").calculate();
 };
 
 String.prototype.replaceNot = function() {
