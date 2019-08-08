@@ -1,14 +1,13 @@
 exports.Calculator = tree => {
-  tree = tree.split(/\(|\)/);
-  tree.forEach(x =>
-    x
-      .replaceNot()
-      .replaceAnd()
-      .replaceOr()
-  );
-
-  console.log(tree.join(" "));
-  return tree.join(" ").calculate();
+  return tree
+    .split(/\(|\)/)
+    .filter(y => y.length > 0)
+    .map(x => (x = x.trim().filterWhileHasMoreThanOneSpace()))
+    .join(" ")
+    .replaceNot()
+    .replaceAnd()
+    .replaceOr()
+    .calculate();
 };
 
 String.prototype.replaceNot = function() {
@@ -33,4 +32,18 @@ String.prototype.calculate = function() {
   return this.match(/(^TRUE$)|TRUE OR|NOT FALSE|TRUE AND TRUE/) ? true : false;
 };
 
+String.prototype.filterWhileHasMoreThanOneSpace = function() {
+  let x = this;
+  while (x.match(/ /g) && x.match(/ /g).length > 1 && x.match(/OR/)) {
+    x = x
+      .replaceNot()
+      .replaceAnd()
+      .replaceOr();
+  }
+  return x;
+};
+
+String.prototype.print = function() {
+  console.log(this);
+};
 //precedence NOT AND OR
