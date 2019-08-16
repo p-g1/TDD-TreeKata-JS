@@ -2,30 +2,35 @@ exports.Calculator = tree => {
   return tree
     .split(/\(|\)/)
     .filter(statement => statement.length > 0)
-    .map(
-      statement =>
-        (statement = statement
-          .trim()
-          .resolveStatementWhileHasMoreThanOneSpace())
-    )
+    .map(statement => (statement = statement.trim().resolveSubStatements()))
     .join(" ")
-    .resolveAllStatements()
-    .calculate();
+    .resolveStatementToTrueOrFalse()
+    .convertToBoolean();
 };
 
-String.prototype.resolveStatementWhileHasMoreThanOneSpace = function() {
+String.prototype.resolveSubStatements = function() {
   let statement = this;
+
   while (
     statement.match(/ /g) &&
     statement.match(/ /g).length > 1 &&
-    statement.match(/OR/)
+    statement.match(/AND|OR/g).length < statement.match(/TRUE|FALSE/g).length
   ) {
-    statement = statement.trim().resolveAllStatements();
+    statement = statement.resolveAllStatementTypes();
   }
   return statement;
 };
 
-String.prototype.resolveAllStatements = function() {
+String.prototype.resolveStatementToTrueOrFalse = function() {
+  let statement = this;
+
+  while (statement.match(/ /g)) {
+    statement = statement.resolveAllStatementTypes();
+  }
+  return statement;
+};
+
+String.prototype.resolveAllStatementTypes = function() {
   return this.resolveNotStatements()
     .resolveAndStatements()
     .resolveOrStatements();
@@ -49,6 +54,6 @@ String.prototype.resolveOrStatements = function() {
   );
 };
 
-String.prototype.calculate = function() {
-  return this.match(/(^TRUE$)|TRUE OR|NOT FALSE|TRUE AND TRUE/) ? true : false;
+String.prototype.convertToBoolean = function() {
+  return this == "TRUE" ? true : false;
 };
